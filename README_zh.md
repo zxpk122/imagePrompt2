@@ -32,6 +32,34 @@
 
 [![Star History Chart](https://api.star-history.com/svg?repos=saasfly/saasfly&type=Timeline)](https://star-history.com/#saasfly/saasfly&Timeline)
 
+## 赞助商
+
+<table>
+  <tr >
+    <td>
+      <a href="https://www.twillot.com/">
+        <picture>
+          <img alt="Take Control of All Your Twitter Assets" src="/twillot.png">
+        </picture>
+      </a>
+    </td>
+    <td>
+      <a href="https://www.setupyourpay.com/" title="如何注册美国公司进行收款">
+        <picture>
+          <img alt="全球收款手册" src="/setupyourpay.png">
+        </picture>
+      </a>
+    </td>
+  <tr >
+    <td >
+      <a href="mailto:contact@nextify.ltd">
+        赞助我们
+      </a>
+    </td>
+  </tr>
+</table>
+
+
 ## 🚀 入门指南
 
 ### 🖱 一键模板

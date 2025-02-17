@@ -46,6 +46,13 @@ See more documentation at <https://document.saasfly.io>
         </picture>
       </a>
     </td>
+    <td>
+      <a href="https://www.setupyourpay.com/" title="如何注册美国公司进行收款">
+        <picture>
+          <img alt="全球收款手册" src="/setupyourpay.png">
+        </picture>
+      </a>
+    </td>
   <tr >
     <td >
       <a href="mailto:contact@nextify.ltd">
