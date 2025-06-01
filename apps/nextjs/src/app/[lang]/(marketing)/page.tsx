@@ -106,16 +106,15 @@ export default async function IndexPage({
                   </div>
                   <div className="flex flex-col items-center justify-start ml-8">
                     <div className="w-[340px]">
-                      <text className="font-semibold">9 </text>
-                      <text
-                        className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.contributors_desc}</text>
+                      <span className="font-semibold">9 </span>
+                      <span className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.contributors_desc}</span>
                     </div>
                     <div className="w-[340px]">
-                      <text
-                        className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.developers_first}</text>
+                      <span
+                        className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.developers_first}</span>
                       <ColourfulText text="2000"/>
-                      <text
-                        className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.developers_second}</text>
+                      <span
+                        className="text-neutral-500 dark:text-neutral-400">{dict.marketing.contributors.developers_second}</span>
                     </div>
                   </div>
                 </div>
@@ -139,6 +138,9 @@ export default async function IndexPage({
         <div className="flex flex-col justify-center items-center pt-10">
           <div className="text-lg text-neutral-500 dark:text-neutral-400">{dict.marketing.sponsor.title}</div>
           <div className="mt-4 flex items-center gap-4">
+            <Link href="https://go.clerk.com/uKDp7Au" target="_blank">
+              <Image src="/images/clerk.png" width="48" height="48" alt="twillot"/>
+            </Link>
             <Link href="https://www.twillot.com/" target="_blank">
               <Image src="https://www.twillot.com/logo-128.png" width="48" height="48" alt="twillot"/>
             </Link>

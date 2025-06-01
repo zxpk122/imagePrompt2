@@ -1,27 +1,29 @@
 import type { NextRequest } from "next/server";
-import { initTRPC } from "@trpc/server";
-import { getToken, type JWT } from "next-auth/jwt";
+import {initTRPC, TRPCError} from "@trpc/server";
+import {auth, currentUser, getAuth} from "@clerk/nextjs/server";
 import { ZodError } from "zod";
 
 import { transformer } from "./transformer";
 
 interface CreateContextOptions {
   req?: NextRequest;
+  auth?: any;
 }
-
-export const createInnerTRPCContext = (opts: CreateContextOptions) => {
+type AuthObject = ReturnType<typeof getAuth>;
+// see: https://clerk.com/docs/references/nextjs/trpc
+export const createTRPCContext = async (opts: {
+  headers: Headers;
+  auth: AuthObject;
+}) => {
   return {
+    userId: opts.auth.userId,
     ...opts,
   };
 };
 
-export const createTRPCContext = (opts: { req: NextRequest }) => {
-  return createInnerTRPCContext({
-    req: opts.req,
-  });
-};
+export type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
 
-export const t = initTRPC.context<typeof createTRPCContext>().create({
+export const t = initTRPC.context<TRPCContext>().create({
   transformer,
   errorFormatter({ shape, error }) {
     return {
@@ -39,14 +41,13 @@ export const createTRPCRouter = t.router;
 export const procedure = t.procedure;
 export const mergeRouters = t.mergeRouters;
 
-export const protectedProcedure = procedure.use(async (opts) => {
-  const { req } = opts.ctx;
-  const nreq = req!;
-  const jwt = await handler(nreq);
-  return opts.next({ ctx: { req, userId: jwt?.id } });
+const isAuthed = t.middleware(({ next, ctx }) => {
+  if (!ctx.userId) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  // Make ctx.userId non-nullable in protected procedures
+  return next({ ctx: { userId: ctx.userId } });
 });
 
-async function handler(req: NextRequest): Promise<JWT | null> {
-  // if using `NEXTAUTH_SECRET` env variable, we detect it, and you won't actually need to `secret`
-  return await getToken({ req });
-}
+
+export const protectedProcedure = procedure.use(isAuthed);
