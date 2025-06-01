@@ -100,7 +100,16 @@ bun db:push
 bun run dev:web
 ```
 
-5. Mở [http://localhost:3000](http://localhost:3000) trong trình duyệt để xem kết quả.
+3. Mở [http://localhost:3000](http://localhost:3000) trong trình duyệt để xem kết quả.
+
+4. (Tùy chọn bản alpha) `bun run tailwind-config-viewer`
+   Mở [http://localhost:3333](http://localhost:3333) trong trình duyệt của bạn để xem cấu hình Tailwind CSS.
+
+### Các ghi chú khác
+
+Chúng tôi sẽ sử dụng Clerk như nhà cung cấp xác thực mặc định kể từ ngày 1 tháng 6 năm 2025.
+
+Bạn có thể tìm thấy mã triển khai NextAuth ở đây ( https://github.com/saasfly/saasfly/tree/feature-nextauth ).
 
 ## 🥺 Lộ trình dự án
 

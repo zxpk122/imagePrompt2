@@ -129,7 +129,15 @@ bun db:push
 bun run dev:web
 ```
 
-5. 在浏览器中打开[http://localhost:3000](http://localhost:3000)查看结果。
+3. 在浏览器中打开[http://localhost:3000](http://localhost:3000)查看结果。
+
+4. （可选的 Alpha 功能）`bun run tailwind-config-viewer` 在你的浏览器中打开 [http://localhost:3333](http://localhost:3333) 查看你的 Tailwind CSS 配置。
+
+### 其他说明
+
+在 2025 年 6 月 1 日之后，我们将使用 Clerk 作为默认的身份验证提供商。
+
+你可以在这里找到 NextAuth 的实现方案 （ https://github.com/saasfly/saasfly/tree/feature-nextauth ）。
 
 ## 🥺 项目路线图
 

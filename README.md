@@ -41,23 +41,23 @@ See more documentation at <https://document.saasfly.io>
   <tr>
     <td>
       <a href="https://go.clerk.com/uKDp7Au">
-        <picture>
-          <img style="width: 50px;" alt="Clerk" src="/clerk.png">
-        </picture>
+        <div style="width: 64px;">
+          <img alt="Clerk" src="/clerk.png">
+        </div>
       </a>
     </td>
     <td>
       <a href="https://www.twillot.com/">
-        <picture>
-          <img style="width: 50px;" alt="Take Control of All Your Twitter Assets" src="/twillot.png">
-        </picture>
+        <div style="width: 64px;">
+          <img alt="Take Control of All Your Twitter Assets" src="/twillot.png">
+        </div>
       </a>
     </td>
     <td>
       <a href="https://www.setupyourpay.com/" title="如何注册美国公司进行收款">
-        <picture>
-          <img style="width: 50px;" alt="全球收款手册" src="/setupyourpay.png">
-        </picture>
+        <div style="width: 64px;">
+          <img alt="全球收款手册" src="/setupyourpay.png">
+        </div>
       </a>
     </td>
   </tr>
@@ -139,6 +139,12 @@ bun run dev:web
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 4. (Optional alpha)`bun run tailwind-config-viewer` Open [http://localhost:3333](http://localhost:3333) in your browser to see your Tailwind CSS configuration
+
+### Other Notes
+
+We are using Clerk as the default authentication provider after 1st June 2025.
+
+You can find the NextAuth implementation here ( https://github.com/saasfly/saasfly/tree/feature-nextauth ) .
 
 
 ## 🥺 Project Roadmap
