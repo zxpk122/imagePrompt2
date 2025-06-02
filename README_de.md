@@ -134,6 +134,7 @@ Hier finden Sie die NextAuth Implementierung ( https://github.com/saasfly/saasfl
 
 ### 🐮 Plattformen
 
+- **[Clerk](https://go.clerk.com/uKDp7Au)** - Die umfassendste Benutzerverwaltungsplattform
 - **[Vercel](https://vercel.com/)** – Stellen Sie Ihre Next.js-App ganz einfach bereit
 - **[Stripe](https://stripe.com/)** – Zahlungsabwicklung für Internetunternehmen
 - **[Resend](https://resend.com/)** – E-Mail-Marketing-Plattform für Entwickler

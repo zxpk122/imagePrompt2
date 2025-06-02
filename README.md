@@ -167,6 +167,7 @@ You can find the NextAuth implementation here ( https://github.com/saasfly/saasf
 
 ### 🐮 Platforms
 
+- **[Clerk](https://go.clerk.com/uKDp7Au)** - The most comprehensive User Management Platform
 - **[Vercel](https://vercel.com/)** – Deploy your Next.js app with ease
 - **[Stripe](https://stripe.com/)** – Payment processing for internet businesses
 - **[Resend](https://resend.com/)** – Email marketing platform for developers

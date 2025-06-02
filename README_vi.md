@@ -132,6 +132,7 @@ Bạn có thể tìm thấy mã triển khai NextAuth ở đây ( https://github
 
 ### 🐮 Nền tảng
 
+- **[Clerk](https://go.clerk.com/uKDp7Au)** - Nền tảng Quản lý người dùng toàn diện nhất
 - **[Vercel](https://vercel.com/)** – Dễ dàng triển khai ứng dụng Next.js của bạn
 - **[Stripe](https://stripe.com/)** – Xử lý thanh toán cho các doanh nghiệp Internet
 - **[Resend](https://resend.com/)** – Nền tảng email marketing cho nhà phát triển
