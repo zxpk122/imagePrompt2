@@ -29,7 +29,7 @@ Máy chủ demo 2 (Địa điểm: Tokyo, Nhật Bản): <https://demo.saasfly.i
 
 ## 🌟 Lịch sử Star
 
-[![Biểu đồ lịch sử Star](https://api.star-history.com/svg?repos=saasfly/saasfly&type=Timeline)](https://star-history.com/#saasfly/saasfly&Timeline)
+[![Biểu đồ lịch sử Star](https://app.repohistory.com/api/svg?repo=saasfly/saasfly&type=Timeline)](https://repohistory.com)
 
 ## 🚀 Bắt đầu
 
