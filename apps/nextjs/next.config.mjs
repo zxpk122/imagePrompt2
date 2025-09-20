@@ -1,12 +1,13 @@
 // @ts-check
-import "./src/env.mjs";
-import "@saasfly/auth/env.mjs";
-
 import { withNextDevtools } from "@next-devtools/core/plugin";
 // import "@saasfly/api/env"
 import withMDX from "@next/mdx";
 
-!process.env.SKIP_ENV_VALIDATION && (await import("./src/env.mjs"));
+// Only import env validation if not skipped
+if (!process.env.SKIP_ENV_VALIDATION) {
+  await import("./src/env.mjs");
+  await import("@saasfly/auth/env.mjs");
+}
 
 /** @type {import("next").NextConfig} */
 const config = {
