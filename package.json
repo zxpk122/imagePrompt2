@@ -37,7 +37,10 @@
     "tooling/*"
   ],
   "packageManager": "bun@v1.1.10",
-  "dependencies": {},
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1"
+  },
   "trustedDependencies": [
     "@clerk/shared",
     "@tsparticles/engine",

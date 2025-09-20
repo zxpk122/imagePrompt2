@@ -2,6 +2,9 @@
 import { withNextDevtools } from "@next-devtools/core/plugin";
 import withMDX from "@next/mdx";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Only import env validation if not skipped
 if (!process.env.SKIP_ENV_VALIDATION) {
