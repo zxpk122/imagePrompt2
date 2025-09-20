@@ -61,22 +61,26 @@ export const authOptions: NextAuthOptions = {
             : "Activate your account";
 
           try {
-            await resend.emails.send({
-              from: env.RESEND_FROM!,
-              to: identifier,
-              subject: authSubject,
-              react: MagicLinkEmail({
-                firstName: user?.name ?? "",
-                actionUrl: url,
-                mailType: userVerified ? "login" : "register",
-                siteName: (siteConfig as { name: string }).name,
-              }),
-              // Set this to prevent Gmail from threading emails.
-              // More info: https://resend.com/changelog/custom-email-headers
-              headers: {
-                "X-Entity-Ref-ID": new Date().getTime() + "",
-              },
-            });
+            if (resend) {
+              await resend.emails.send({
+                from: env.RESEND_FROM!,
+                to: identifier,
+                subject: authSubject,
+                react: MagicLinkEmail({
+                  firstName: user?.name ?? "",
+                  actionUrl: url,
+                  mailType: userVerified ? "login" : "register",
+                  siteName: (siteConfig as { name: string }).name,
+                }),
+                // Set this to prevent Gmail from threading emails.
+                // More info: https://resend.com/changelog/custom-email-headers
+                headers: {
+                  "X-Entity-Ref-ID": new Date().getTime() + "",
+                },
+              });
+            } else {
+              console.warn("Resend API key not configured, skipping email send");
+            }
           } catch (error) {
             console.log(error);
           }
