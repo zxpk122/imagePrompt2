@@ -1,5 +1,5 @@
 // @ts-check
-import { withNextDevtools } from "@next-devtools/core/plugin";
+// import { withNextDevtools } from "@next-devtools/core/plugin";
 import withMDX from "@next/mdx";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -110,4 +110,4 @@ const config = {
   },
 };
 
-export default withNextDevtools(withMDX()(config));
+export default withMDX()(config);
