@@ -40,45 +40,49 @@ export const authOptions: NextAuthOptions = {
   adapter: KyselyAdapter(db),
 
   providers: [
-    GitHubProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
-      httpOptions: { timeout: 15000 },
-    }),
-    EmailProvider({
-      sendVerificationRequest: async ({ identifier, url }) => {
-        const user = await db
-          .selectFrom("User")
-          .select(["name", "emailVerified"])
-          .where("email", "=", identifier)
-          .executeTakeFirst();
-        const userVerified = !!user?.emailVerified;
-        const authSubject = userVerified
-          ? `Sign-in link for ${(siteConfig as { name: string }).name}`
-          : "Activate your account";
+    ...(env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET ? [
+      GitHubProvider({
+        clientId: env.GITHUB_CLIENT_ID,
+        clientSecret: env.GITHUB_CLIENT_SECRET,
+        httpOptions: { timeout: 15000 },
+      })
+    ] : []),
+    ...(env.RESEND_FROM ? [
+      EmailProvider({
+        sendVerificationRequest: async ({ identifier, url }) => {
+          const user = await db
+            .selectFrom("User")
+            .select(["name", "emailVerified"])
+            .where("email", "=", identifier)
+            .executeTakeFirst();
+          const userVerified = !!user?.emailVerified;
+          const authSubject = userVerified
+            ? `Sign-in link for ${(siteConfig as { name: string }).name}`
+            : "Activate your account";
 
-        try {
-          await resend.emails.send({
-            from: env.RESEND_FROM,
-            to: identifier,
-            subject: authSubject,
-            react: MagicLinkEmail({
-              firstName: user?.name ?? "",
-              actionUrl: url,
-              mailType: userVerified ? "login" : "register",
-              siteName: (siteConfig as { name: string }).name,
-            }),
-            // Set this to prevent Gmail from threading emails.
-            // More info: https://resend.com/changelog/custom-email-headers
-            headers: {
-              "X-Entity-Ref-ID": new Date().getTime() + "",
-            },
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
+          try {
+            await resend.emails.send({
+              from: env.RESEND_FROM!,
+              to: identifier,
+              subject: authSubject,
+              react: MagicLinkEmail({
+                firstName: user?.name ?? "",
+                actionUrl: url,
+                mailType: userVerified ? "login" : "register",
+                siteName: (siteConfig as { name: string }).name,
+              }),
+              // Set this to prevent Gmail from threading emails.
+              // More info: https://resend.com/changelog/custom-email-headers
+              headers: {
+                "X-Entity-Ref-ID": new Date().getTime() + "",
+              },
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        },
+      })
+    ] : []),
   ],
   callbacks: {
     session({ token, session }) {
