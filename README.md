@@ -13,6 +13,8 @@
 ![COMMIT_ACTIVITY](https://img.shields.io/github/commit-activity/m/saasfly/saasfly?style=for-the-badge">)
 [![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fsaasfly%2Fsaasfly&labelColor=%23f47373&countColor=%23263759)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2Fsaasfly%2Fsaasfly)
 
+<!-- Updated: 2025-01-19 - Fixed package.json format issue -->
+
 An easy-to-use and enterprise-grade Next.js boilerplate.
 
 You don't need to buy templates anymore; Saasfly provides a complete, open-source solution for building SaaS applications quickly and easily.
