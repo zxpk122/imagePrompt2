@@ -1,0 +1,6 @@
+部署触发文件
+创建时间: 2025-01-19
+目的: 强制触发Vercel重新部署以使用最新的package.json修复
+
+最新提交: f3f9bf3
+修复内容: auth-proxy/package.json 格式问题
