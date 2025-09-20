@@ -12,9 +12,9 @@
     "lint": "eslint .",
     "format": "prisma format && prettier --check '**/*.{ts,json}' ",
     "db:generate": "prisma generate",
-    "db:push": "bun with-env prisma db push --skip-generate",
+    "db:push": "dotenv -e d:/Code/imagePrompt2/saasfly/.env.local -- prisma db push --skip-generate --schema=./prisma/schema.prisma",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env.local --"
+    "with-env": "dotenv -e d:/Code/imagePrompt2/saasfly/.env.local --"
   },
   "dependencies": {
     "kysely": "0.27.3",

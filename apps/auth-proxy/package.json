@@ -31,3 +31,11 @@
   },
   "prettier": "@saasfly/prettier-config"
 }
+"scripts": {
+  "clean": "rm -rf .turbo node_modules",
+  "lint": "eslint",
+  "format": "prettier --write '**/*.{js,cjs,mjs,ts,tsx,md,json}' --ignore-path .prettierignore",
+  "typecheck": "tsc --noEmit",
+  "build": "nitro build",
+  "start": "nitro preview"
+}
