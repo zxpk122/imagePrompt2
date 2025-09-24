@@ -6,7 +6,7 @@ import Negotiator from "negotiator";
 import { i18n } from "~/config/i18n-config";
 import { env } from "@saasfly/auth/env.mjs";
 
-const noNeedProcessRoute = [".*\\.png", ".*\\.jpg", ".*\\.opengraph-image.png"];
+const noNeedProcessRoute = ["/images/(.*)", "/_next/(.*)", "/static/(.*)", "/favicon.ico"];
 
 const noRedirectRoute = ["/api(.*)", "/trpc(.*)", "/admin"];
 

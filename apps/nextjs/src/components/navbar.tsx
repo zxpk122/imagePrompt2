@@ -46,8 +46,8 @@ export function NavBar({
 
   return (
     <header
-      className={`sticky top-0 z-40 flex w-full justify-center border-border bg-background/60 backdrop-blur-xl transition-all ${
-        scroll ? (scrolled ? "border-b" : "bg-background/0") : "border-b"
+      className={`sticky top-0 z-40 flex w-full justify-center border-border bg-white/80 backdrop-blur-xl transition-all ${
+        scroll ? (scrolled ? "border-b" : "bg-white/0") : "border-b"
       }`}
     >
       <div className="container flex h-16 items-center justify-between py-4">
@@ -55,17 +55,17 @@ export function NavBar({
           {children}
         </MainNav>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-6">
           {items?.length ? (
-            <nav className="hidden gap-6 md:flex">
+            <nav className="hidden gap-8 md:flex">
               {items?.map((item, index) => (
                 <Link
                   key={index}
                   href={item.disabled ? "#" : (item.href.startsWith("http") ? item.href : `/${lang}${item.href}`)}
                   className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                    "flex items-center text-sm font-medium transition-colors hover:text-purple-600 text-gray-700",
                     item.href.startsWith(`/${segment}`)
-                      ? "text-blue-500 font-semibold"
+                      ? "text-purple-600 font-semibold"
                       : "",
                     item.disabled && "cursor-not-allowed opacity-80",
                   )}
@@ -76,42 +76,37 @@ export function NavBar({
             </nav>
           ) : null}
 
-          <div className="w-[1px] h-8 bg-accent"></div>
+          <div className="flex items-center space-x-3">
+            <LocaleChange url={"/"} />
+            {!user ? (
+              <Link href={`/${lang}/login`}>
+                <Button variant="outline" size="sm" className="text-purple-600 border-purple-600 hover:bg-purple-50">
+                  {typeof marketing.login === "string"
+                    ? marketing.login
+                    : "Login"}
+                </Button>
+              </Link>
+            ) : null}
 
-          {rightElements}
-
-          <div className="hidden md:flex lg:flex xl:flex">
-            <GitHubStar />
-          </div>
-          <LocaleChange url={"/"} />
-          {!user ? (
-            <Link href={`/${lang}/login-clerk`}>
-              <Button variant="outline" size="sm">
-                {typeof marketing.login === "string"
-                  ? marketing.login
-                  : "Default Login Text"}
+            {user ? (
+              <UserAccountNav
+                user={user}
+                params={{ lang: `${lang}` }}
+                dict={dropdown}
+              />
+            ) : (
+              <Button
+                className="px-4 bg-purple-600 hover:bg-purple-700"
+                variant="default"
+                size="sm"
+                onClick={signInModal.onOpen}
+              >
+                {typeof marketing.signup === "string"
+                  ? marketing.signup
+                  : "Try it now!"}
               </Button>
-            </Link>
-          ) : null}
-
-          {user ? (
-            <UserAccountNav
-              user={user}
-              params={{ lang: `${lang}` }}
-              dict={dropdown}
-            />
-          ) : (
-            <Button
-              className="px-3"
-              variant="default"
-              size="sm"
-              onClick={signInModal.onOpen}
-            >
-              {typeof marketing.signup === "string"
-                ? marketing.signup
-                : "Default Signup Text"}
-            </Button>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </header>

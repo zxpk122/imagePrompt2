@@ -130,6 +130,7 @@
     "./tabs": "./src/tabs.tsx",
     "./text-generate-effect": "./src/text-generate-effect.tsx",
     "./text-reveal": "./src/text-reveal.tsx",
+    "./theme-provider": "./src/theme-provider.tsx",
     "./toaster": "./src/toaster.tsx",
     "./typewriter-effect": "./src/typewriter-effect.tsx",
     "./use-toast": "./src/use-toast.tsx",

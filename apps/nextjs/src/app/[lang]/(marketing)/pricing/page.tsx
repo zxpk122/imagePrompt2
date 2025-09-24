@@ -4,7 +4,7 @@ import { PricingCards } from "~/components/price/pricing-cards";
 import { PricingFaq } from "~/components/price/pricing-faq";
 import type { Locale } from "~/config/i18n-config";
 import { getDictionary } from "~/lib/get-dictionary";
-import { trpc } from "~/trpc/server";
+import { serverTrpc } from "~/trpc/server-caller";
 
 export const metadata = {
   title: "Pricing",
@@ -22,7 +22,7 @@ export default async function PricingPage({
   let subscriptionPlan;
 
   if (user) {
-    subscriptionPlan = await trpc.stripe.userPlans.query();
+    subscriptionPlan = await serverTrpc.stripe.userPlans();
   }
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">

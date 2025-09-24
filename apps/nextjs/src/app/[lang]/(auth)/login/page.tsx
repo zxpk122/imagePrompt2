@@ -45,13 +45,13 @@ export default async function LoginPage({
             className="mx-auto"
             width="64"
             height="64"
-            alt=""
+            alt="ImagePrompt Logo"
           />
           <h1 className="text-2xl font-semibold tracking-tight">
-            {dict.login.welcome_back}
+            欢迎回到 ImagePrompt
           </h1>
           <p className="text-sm text-muted-foreground">
-            {dict.login.signin_title}
+            输入您的邮箱登录账户
           </p>
         </div>
         <UserAuthForm lang={lang} dict={dict.login} />

@@ -9,7 +9,7 @@ import {
 import { DashboardShell } from "~/components/shell";
 import type { Locale } from "~/config/i18n-config";
 import { getDictionary } from "~/lib/get-dictionary";
-import { trpc } from "~/trpc/server";
+import { serverTrpc } from "~/trpc/server-caller";
 import { SubscriptionForm } from "./subscription-form";
 
 export const metadata = {
@@ -57,7 +57,9 @@ function generateSubscriptionMessage(
 }
 
 async function SubscriptionCard({ dict }: { dict: Record<string, string> }) {
-  const subscription = (await trpc.auth.mySubscription.query()) as Subscription;
+  // 使用serverTrpc进行服务器端调用
+  const caller = await serverTrpc.auth.mySubscription();
+  const subscription = caller as Subscription;
   const content = generateSubscriptionMessage(dict, subscription);
   return (
     <Card>

@@ -38,7 +38,7 @@ export const SignInModal = ({ dict }: { dict: Record<string, string> }) => {
             disabled={signInClicked}
             onClick={() => {
               setSignInClicked(true);
-              signIn("github", { redirect: false })
+              signIn("google", { redirect: false })
                 .then(() =>
                   setTimeout(() => {
                     signInModal.onClose();
@@ -52,9 +52,9 @@ export const SignInModal = ({ dict }: { dict: Record<string, string> }) => {
             {signInClicked ? (
               <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
-              <Icons.GitHub className="mr-2 h-4 w-4" />
+              <Icons.Google className="mr-2 h-4 w-4" />
             )}{" "}
-            {dict.signup_github}
+            {dict.signup_google}
           </Button>
         </div>
       </div>

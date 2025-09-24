@@ -1,44 +1,31 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { createTRPCProxyClient, loggerLink, TRPCClientError } from "@trpc/client";
-
+import { createTRPCProxyClient, loggerLink } from "@trpc/client";
 import { AppRouter } from "@saasfly/api";
-
 import { transformer } from "./shared";
 import { observable } from "@trpc/server/observable";
-import { callProcedure } from "@trpc/server";
 import { TRPCErrorResponse } from "@trpc/server/rpc";
 import { cache } from "react";
 import { appRouter } from "../../../../packages/api/src/root";
-import { auth } from "@clerk/nextjs/server";
-
-type AuthObject = Awaited<ReturnType<typeof auth>>;
-
-export const createTRPCContext = async (opts: {
-  headers: Headers;
-  auth: AuthObject;
-// eslint-disable-next-line @typescript-eslint/require-await
-}) => {
-  return {
-    userId: opts.auth.userId,
-    ...opts,
-  };
-};
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@saasfly/auth";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
-  return createTRPCContext({
+  const session = await getServerSession(authOptions);
+  
+  return {
     headers: new Headers({
       cookie: cookies().toString(),
       "x-trpc-source": "rsc",
     }),
-    auth: await auth(),
-  });
+    session,
+    userId: session?.user?.id,
+  };
 });
 
 export const trpc = createTRPCProxyClient<AppRouter>({
@@ -58,12 +45,15 @@ export const trpc = createTRPCProxyClient<AppRouter>({
         observable((observer) => {
           createContext()
             .then((ctx) => {
-              return callProcedure({
-                procedures: appRouter._def.procedures,
-                path: op.path,
+              const procedure = appRouter._def.procedures[op.path];
+              if (!procedure) {
+                throw new Error(`No such procedure: ${op.path}`);
+              }
+              return procedure({
                 rawInput: op.input,
-                ctx,
+                path: op.path,
                 type: op.type,
+                ctx,
               });
             })
             .then((data) => {
@@ -71,9 +61,11 @@ export const trpc = createTRPCProxyClient<AppRouter>({
               observer.complete();
             })
             .catch((cause: TRPCErrorResponse) => {
-              observer.error(TRPCClientError.from(cause));
+              // 使用自定义错误处理而不是TRPCClientError.from
+              observer.error(new Error(cause.message || "TRPC调用错误"));
             });
         }),
   ],
 });
+
 export {type RouterInputs, type RouterOutputs} from "@saasfly/api";

@@ -12,7 +12,7 @@ import * as Icons from "@saasfly/ui/icons";
 
 export default function LoginPage() {
   // const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
+  const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
 
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
@@ -66,22 +66,22 @@ export default function LoginPage() {
               type="button"
               className={cn(buttonVariants({ variant: "outline" }))}
               onClick={() => {
-                setIsGitHubLoading(true);
-                signIn("github", {
+                setIsGoogleLoading(true);
+                signIn("google", {
                   redirect: true,
                   callbackUrl: "http://localhost:3000/admin/dashboard",
                 }).catch((error) => {
-                  console.error("GitHub signIn error:", error);
+                  console.error("Google signIn error:", error);
                 });
               }}
-              disabled={isGitHubLoading}
+              disabled={isGoogleLoading}
             >
-              {isGitHubLoading ? (
+              {isGoogleLoading ? (
                 <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icons.GitHub className="mr-2 h-4 w-4" />
+                <Icons.Google className="mr-2 h-4 w-4" />
               )}{" "}
-              Github
+              Google
             </button>
           </div>
         </CardBody>

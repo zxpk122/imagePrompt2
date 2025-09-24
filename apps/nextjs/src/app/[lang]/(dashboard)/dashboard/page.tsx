@@ -17,7 +17,7 @@ import { ClusterItem } from "~/components/k8s/cluster-item";
 import { DashboardShell } from "~/components/shell";
 import type { Locale } from "~/config/i18n-config";
 import { getDictionary } from "~/lib/get-dictionary";
-import { trpc } from "~/trpc/server";
+import { serverTrpc } from "~/trpc/server-caller";
 import type { ClustersArray } from "~/types/k8s";
 
 export const metadata = {
@@ -37,16 +37,16 @@ export default async function DashboardPage({
   if (!user) {
     redirect(authOptions?.pages?.signIn ?? "/login-clerk");
   }
-  const customer = await trpc.customer.queryCustomer.query({
+  const customer = await serverTrpc.customer.queryCustomer({
     userId: user.id,
   });
   if (!customer) {
-    await trpc.customer.insertCustomer.mutate({
+    await serverTrpc.customer.insertCustomer({
       userId: user.id,
     });
   }
   // const accout
-  const result: ClustersArray = await trpc.k8s.getClusters.query();
+  const result: ClustersArray = await serverTrpc.k8s.getClusters();
   if (result) {
     const clusters = result;
     const dict = await getDictionary(lang);
